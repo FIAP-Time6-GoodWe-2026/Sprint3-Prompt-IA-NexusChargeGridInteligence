@@ -7,7 +7,7 @@ funcionava antes do refactory:
 - System prompt (sem hierarquia de instruções / sem guardrails explícitos)
   reenviado a cada chamada.
 - Histórico de conversa mantido manualmente em uma lista Python.
-- Sem tools: todo o contexto do ChargeGrid é colado direto no system prompt.
+- Sem tools: O contexto do ChargeGrid é colado direto no system prompt.
 - Sem tratamento especial para conteúdo injetado ou tentativas de override.
 """
 
