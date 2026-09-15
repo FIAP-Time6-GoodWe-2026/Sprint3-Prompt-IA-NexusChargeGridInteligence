@@ -38,7 +38,7 @@ MODEL_PRIMARY = ModelConfig(
     ollama_tag=os.getenv("CHARGEGRID_MODEL", "qwen3:8b"),
     temperature=0.4,
     top_p=0.85,
-    num_predict=400,
+    num_predict=1200,
 )
 
 # Modelo secundário — usado apenas no Bloco B (comparação entre modelos).
