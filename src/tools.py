@@ -49,7 +49,7 @@ Estimativa em tempo real disponível no app.
 """,
     "pagamento": """\
 # Pagamento
-Avulso (PIX ou cartão, sem cadastro), Plano corporativo (desconto fixo +
+Avulso (PIX ou cartão, sem cadastro), assinatura mensal (desconto fixo +
 prioridade + cashback) ou plano premium (acesso reservado). Cobrança
 sempre pelo kWh efetivamente consumido, ao final da sessão.
 """,

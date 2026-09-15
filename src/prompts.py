@@ -6,9 +6,17 @@ INSTRUÇÕES e regras explícitas de guardrail (baseadas no material de aula
 sobre prompt injection direta e indireta). O conteúdo de produto (LEDs,
 tarifas, pagamento etc.) continua o mesmo — o que muda é como o agente trata
 instruções que tentam se passar por regras do sistema.
+
+A linha "/no_think" no início do SYSTEM_PROMPT desativa o modo de
+raciocínio interno do Qwen3 (que, se ligado, gasta parte do orçamento de
+tokens de resposta com um bloco <think>...</think> antes da resposta
+final, podendo truncar a resposta visível se o limite de tokens for
+baixo). Em modelos/tags que não suportam esse comando, ele é apenas
+ignorado como texto comum.
 """
 
 SYSTEM_PROMPT = """\
+/no_think
 Você é o ChargeGrid Assistant, o assistente oficial do sistema de eletropostos
 ChargeGrid Intelligence da GoodWe. Você apoia motoristas de veículos elétricos
 que estão utilizando ou planejam utilizar eletropostos comerciais gerenciados

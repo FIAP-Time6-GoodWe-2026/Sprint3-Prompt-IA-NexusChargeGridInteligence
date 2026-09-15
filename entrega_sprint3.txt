@@ -21,8 +21,8 @@ https://github.com/FIAP-Time6-GoodWe-2026/Sprint3-Prompt-IA-NexusChargeGridIntel
 RESUMO DA IMPLEMENTAÇÃO:
   Projeto      : ChargeGrid Assistant — Sprint 03
   Framework    : LangChain / LangGraph (create_agent + checkpointer)
-  Modelos      : DeepSeek-V3-0324 (principal) + Qwen/Qwen2.5-72B-Instruct (Secundário)
-  Plataforma   : Projeto local (não notebook), execução via HuggingFace Inference API
+  Modelos      : Qwen3-8b (principal) + Llama3.1-8b (comparação) — via Ollama local
+  Plataforma   : Projeto local (não notebook), modelos rodando localmente via Ollama
 
 ====================================================
   FIM DA ENTREGA

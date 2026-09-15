@@ -7,13 +7,14 @@ funcionava antes do refactory:
 - System prompt (sem hierarquia de instruções / sem guardrails explícitos)
   reenviado a cada chamada.
 - Histórico de conversa mantido manualmente em uma lista Python.
-- Sem tools: O contexto do ChargeGrid é colado direto no system prompt.
-- Sem tratamento especial para conteúdo injetado ou tentativas de override.
+- Sem tools/framework: O contexto do ChargeGrid é colado direto no
+  system prompt, e a chamada ao modelo é feita direto pelo client do
+  Ollama (sem LangChain), para deixar bem claro o "antes" do refactory.
 """
 
-from huggingface_hub import InferenceClient
+import ollama
 
-from src.config import HF_TOKEN, ModelConfig
+from src.config import OLLAMA_HOST, ModelConfig
 
 LEGACY_SYSTEM_PROMPT = """\
 Você é o ChargeGrid Assistant, o assistente oficial do sistema de eletropostos
@@ -35,23 +36,31 @@ suporte. Mantenha o foco em eletromobilidade e no ecossistema ChargeGrid.
 class LegacyChargeGridChatbot:
     """Réplica fiel do padrão Sprint 1/2: um único system prompt fixo +
     histórico de mensagens mantido "na mão" (lista de dicts), sem framework
-    de agentes e sem tools.
+    de agentes e sem tools. Roda contra o Ollama local (mesmo servidor
+    usado pela versão nova) só para isolar a variável "framework" na
+    comparação antes/depois — não é assim que a Sprint 1/2 rodava de fato
+    (que usava a Hugging Face Inference API), mas garante que a diferença
+    medida hoje seja "com framework" vs. "sem framework", não "modelo
+    diferente".
     """
 
     def __init__(self, model_config: ModelConfig):
         self.model_config = model_config
-        self.client = InferenceClient(model=model_config.repo_id, token=HF_TOKEN)
+        self.client = ollama.Client(host=OLLAMA_HOST)
         self.history: list[dict] = [{"role": "system", "content": LEGACY_SYSTEM_PROMPT}]
 
     def ask(self, pergunta: str) -> str:
         self.history.append({"role": "user", "content": pergunta})
 
-        resposta = self.client.chat_completion(
+        resposta = self.client.chat(
+            model=self.model_config.ollama_tag,
             messages=self.history,
-            temperature=self.model_config.temperature,
-            top_p=self.model_config.top_p,
-            max_tokens=self.model_config.max_new_tokens,
+            options={
+                "temperature": self.model_config.temperature,
+                "top_p": self.model_config.top_p,
+                "num_predict": self.model_config.num_predict,
+            },
         )
-        conteudo = resposta.choices[0].message.content
+        conteudo = resposta["message"]["content"]
         self.history.append({"role": "assistant", "content": conteudo})
         return conteudo
