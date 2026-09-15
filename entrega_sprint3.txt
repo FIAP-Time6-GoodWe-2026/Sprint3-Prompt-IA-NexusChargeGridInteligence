@@ -1,0 +1,29 @@
+====================================================
+  ENTREGA — SPRINT 03
+  Disciplina: Prompt and Artificial Intelligence
+  EV Challenge 2026 — GoodWe × FIAP
+  Turma: 1CCPZ (Ciências da Computação — Noturno)
+====================================================
+
+INTEGRANTES:
+  Alan Junio Araujo de Souza        | RM: 574112
+  Arthur Vettorazzo de Souza        | RM: 569445
+  Brayan Barbosa Dos Santos         | RM: 573682
+  Giovanne Gomes Petenuci           | RM: 574091
+  Gustavo Zibini Belizario          | RM: 561376
+  Luiz Otávio Brito Freixo          | RM: 569977
+
+----------------------------------------------------
+REPOSITÓRIO GITHUB:
+https://github.com/FIAP-Time6-GoodWe-2026/Sprint3-Prompt-IA-NexusChargeGridInteligence
+----------------------------------------------------
+
+RESUMO DA IMPLEMENTAÇÃO:
+  Projeto      : ChargeGrid Assistant — Sprint 03
+  Framework    : LangChain / LangGraph (create_agent + checkpointer)
+  Modelos      : DeepSeek-V3-0324 (principal) + Qwen/Qwen2.5-72B-Instruct (Secundário)
+  Plataforma   : Projeto local (não notebook), execução via HuggingFace Inference API
+
+====================================================
+  FIM DA ENTREGA
+====================================================
